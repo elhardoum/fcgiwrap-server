@@ -13,6 +13,10 @@ COPY default.conf /etc/nginx/http.d/
 # default html app
 COPY www /var/www/html
 
+# install python modules
+ADD requirements.txt .
+RUN pip3 install -r requirements.txt
+
 # health check: test fcgiwrap socket listener
 HEALTHCHECK --interval=30s --timeout=3s \
   CMD socat -u OPEN:/dev/null UNIX-CONNECT:/var/run/fcgiwrap.socket || exit 1
