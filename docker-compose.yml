@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    image: web-server
+    build: .
+    volumes:
+      - ./default.conf:/etc/nginx/http.d/default.conf
+      - ./www:/var/www/html
+    ports:
+      - 9000:80
+    restart: unless-stopped
+
+  autoheal:
+    restart: always
+    image: willfarrell/autoheal
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
