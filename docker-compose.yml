@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: web-server
+    image: elhardoum/fcgiwrap-server:latest
     build: .
     volumes:
       - ./default.conf:/etc/nginx/http.d/default.conf
