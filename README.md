@@ -24,3 +24,17 @@ Using docker-compose:
 ```sh
 docker-compose up -d
 ```
+
+### Hook to entrypoint.sh
+
+You may hook to the `entrypoint.sh` script and run shell commands before services are loaded, so it will happen every time you start the containers. Just mount your local sh file to `/var/opt/entrypoint-hook.sh`.
+
+For that, you may attach a volume `-v /path/to/local/entrypoint-hook.sh:/var/opt/entrypoint-hook.sh`, or via docker-compose:
+
+```yml
+# ...
+    volumes:
+      # ...
+      - ./entrypoint-hook.sh:/var/opt/entrypoint-hook.sh
+# ...
+```
